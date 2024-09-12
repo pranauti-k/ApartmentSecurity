@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="topnav">
+    {% if session.logged_in %}
+        <a href="/logout/">Logout</a>
+    {% else %}
+        <a href="/login/">Login</a>
+        <a href="/register/">Sign up</a>
+    {% endif %}
+</div>
+<hr>
+
+<center>
+    {% for message in get_flashed_messages() %}
+      <h4><div class="flash">{{ message }}</div></h4>
+    {% endfor %}
+</center>
+
+{% if session['logged_in'] %}
+    <h5>Welcome, @{{session['username'] }}</h5>
+    <a href="/main/{{session['name']}}">List of videos</a>
+{% else %}
+    <h1> Welcome!</h1>
+    <h3> Please login to view logs. </h3>
+    <h7> If you aren't a registered user yet, sign up now! </h7>
+{% endif %}
+
+{% endblock body %}
